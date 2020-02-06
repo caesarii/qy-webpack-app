@@ -3,6 +3,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     // 开发模式
@@ -27,11 +28,12 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: ['style-loader', 'css-loader', {
+                // 用 MiniCssExtractPlugin 代替 styleloader
+                use: [MiniCssExtractPlugin.loader, 'css-loader', {
                     loader: 'postcss-loader',
                     options: { plugins: [require('autoprefixer')] }
                 },'less-loader']
-            }
+            },
         ],
     },
     plugins: [
@@ -49,5 +51,9 @@ module.exports = {
             chunks: ['header']
         }),
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].[hash].css",
+            chunkFilename: "[id].css"
+        })
     ]
 }
