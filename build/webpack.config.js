@@ -18,6 +18,19 @@ module.exports = {
         // 打包后的目录
         path: path.resolve(__dirname, '../dist')
     },
+    module: {
+        rules: [
+            // 目前不会显式的在 HTML 中插入 style 标签, 而是通过 js 动态插入的, 表现就是 dist/html 没有标签, 实际网页中有
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader']
+            }
+        ],
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../public/index.html'),
