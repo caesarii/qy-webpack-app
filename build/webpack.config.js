@@ -9,7 +9,7 @@ module.exports = {
     entry: path.resolve(__dirname, '../src/main.js'),
     output: {
         // 打包后的文件名称
-        filename: 'output.js',
+        filename: '[name].[hash:8].js',
         // 打包后的目录
         path: path.resolve(__dirname, '../dist')
     }
