@@ -2,6 +2,7 @@
 // 添加 config 之后打包输出已经与默认不同了
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     // 开发模式
@@ -31,5 +32,6 @@ module.exports = {
             // 与入口文件都应的模块名
             chunks: ['header']
         }),
+        new CleanWebpackPlugin(),
     ]
 }
